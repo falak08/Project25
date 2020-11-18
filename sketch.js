@@ -1,8 +1,8 @@
-var paper,dustbin,groundSprite,paperBody,pimage,dimage;
+var paper1,dustbin,groundSprite,paperBody,pimage,dimage;
 const Engine = Matter.Engine;
 const World = Matter.World;
-const Bodies = Matter.Bodies;
-const Body = Matter.Body;
+
+const Body = Matter.Bodies;
 
 function preload()
 {
@@ -12,9 +12,8 @@ dimage=loadImage("dustbinimage.png")
 
 function setup() {
 	createCanvas(800, 700);
-paper=createSprite(50,600,20,20,options);
-paper.addImage(pimage);
-paper.scale=0.5;
+	paper1=new Paper(50,600,20,20);
+
 
 dustbin=createSprite(width/2,600,20,20);
 dustbin.addImage(dimage);
@@ -27,7 +26,7 @@ groundSprite=createSprite(width/2, height-20, width,10);
 	world = engine.world;
 
 	//Create the Bodies Here.
-	paperBody = Bodies.circle(width/2 , 200 , 5,options);
+	
 	
 	World.add(world, paperBody);
 	
@@ -35,13 +34,7 @@ groundSprite=createSprite(width/2, height-20, width,10);
 	world = engine.world;
 
 	Engine.run(engine);
-  var options={
-	  isStatic:false,
-	  restitution:0.3,
-	  friction:0.5,
-	  density:1.2
-
-  }
+ 
 }
 
 
@@ -49,6 +42,7 @@ function draw() {
   rectMode(CENTER);
   background("cyan");
   
+  paper1.display();
   keyPressed();
   drawSprites();
  
@@ -56,8 +50,7 @@ function draw() {
 
 function keyPressed(){
 	if(keyCode===UP_ARROW){
-	Matter.Body.applyForce(paperBody,paperBody.position,{x:85,y:-85});
-		
+	
 	}
 }
 
